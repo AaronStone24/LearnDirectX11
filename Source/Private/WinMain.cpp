@@ -8,7 +8,27 @@ WCHAR	WindowClass[MAX_CLASS_NAME_LENGTH];
 INT		WindowHeight;
 INT		WindowWidth;
 
-int CALLBACK wWinMain(HINSTANCE, HINSTANCE, LPSTR, int)
+LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+	switch(msg)
+	{
+	case WM_CLOSE:
+		if (MessageBox(hWnd, L"Really quit?", L"My application", MB_OKCANCEL) == IDOK)
+		{
+			DestroyWindow(hWnd);
+		}
+		PostQuitMessage(24);
+		break;
+	case WM_DESTROY:
+		PostQuitMessage(99);
+		break;
+	default:
+		break;
+	}
+	return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+
+int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int mCmdShow)
 {
 	// Initialize Global Variables
 	wcscpy_s(WindowClass, TEXT("Our First Window"));
@@ -17,32 +37,27 @@ int CALLBACK wWinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 
 	//Create Windows Class
 	
-	WNDCLASSEX wcex;
+	WNDCLASSEX wcex = { 0 };
 
 	wcex.cbSize = sizeof(WNDCLASSEX);
-	wcex.style = CS_HREDRAW | CS_VREDRAW;
+	wcex.style = CS_OWNDC;
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)GetStockObject(NULL_BRUSH);
-
 	wcex.hIcon = LoadIcon(0, IDI_APPLICATION);
 	wcex.hIconSm = LoadIcon(0, IDI_APPLICATION);
-
 	wcex.lpszMenuName = nullptr;
-
 	wcex.lpszClassName = WindowClass;
-
-	wcex.hInstance = HINSTANCE();
-
-	wcex.lpfnWndProc = DefWindowProc;
+	wcex.hInstance = hInstance;
+	wcex.lpfnWndProc = WndProc;
 
 	RegisterClassEx(&wcex);
 
 	//create window
 
-	HWND hWnd = CreateWindow(WindowClass, WindowClass, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, WindowWidth, WindowHeight, nullptr, nullptr, HINSTANCE(), nullptr);
+	HWND hWnd = CreateWindowEx(0, WindowClass, WindowClass, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
+		0, 0, 1368, 786, nullptr, nullptr, hInstance, nullptr);
 	if (!hWnd)
 	{
 		MessageBox(0, L"Failed to Create Window!", 0, 0);
@@ -57,15 +72,19 @@ int CALLBACK wWinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	// Listen for messages
 
 	MSG msg = { 0 };
-	while (msg.message != WM_QUIT)
+	BOOL gResult;
+	while ((gResult = GetMessage(&msg, nullptr, 0 ,0)) != 0)
 	{
-		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
 	}
 
-
-	return 0;
+	if (gResult == -1)
+	{
+		return -1;
+	}
+	else
+	{
+		return msg.wParam;
+	}
 }
