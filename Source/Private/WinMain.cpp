@@ -1,4 +1,5 @@
 #include <windows.h>
+#include "../Public/WindowsMessageMap.h"
 
 #define MAX_CLASS_NAME_LENGTH 256
 #define HINSTANCE() GetModuleHandle(NULL)
@@ -10,6 +11,9 @@ INT		WindowWidth;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
+	static WindowsMessageMap mm;
+	OutputDebugString(mm.s2ws(mm(msg, lParam, wParam)).c_str());
+
 	switch(msg)
 	{
 	case WM_CLOSE:
