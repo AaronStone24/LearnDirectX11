@@ -1,4 +1,5 @@
 #include <windows.h>
+#include <sstream>
 #include "../Public/WindowsMessageMap.h"
 
 #define MAX_CLASS_NAME_LENGTH 256
@@ -38,6 +39,21 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			SetWindowTextA(hWnd, "My Application");
 		}
 		break;
+	case WM_CHAR:
+	{
+		static std::string title;
+		title.push_back((char)wParam);
+		SetWindowTextA(hWnd, title.c_str());
+	}
+	break;
+	case WM_LBUTTONDOWN:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		std::ostringstream oss = {};
+		oss << "(" << pt.x << "," << pt.y << ")";
+		SetWindowTextA(hWnd, oss.str().c_str());
+	}
+	break;
 	default:
 		break;
 	}
