@@ -21,10 +21,22 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		{
 			DestroyWindow(hWnd);
 		}
-		PostQuitMessage(24);
+		return (24);
 		break;
 	case WM_DESTROY:
 		PostQuitMessage(99);
+		break;
+	case WM_KEYDOWN:
+		if (wParam == 'F')
+		{
+			SetWindowTextA(hWnd, "Paid Respects");
+		}
+		break;
+	case WM_KEYUP:
+		if (wParam == 'F')
+		{
+			SetWindowTextA(hWnd, "My Application");
+		}
 		break;
 	default:
 		break;

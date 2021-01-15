@@ -354,7 +354,7 @@ std::string WindowsMessageMap::operator()(DWORD msg, LPARAM lParam, WPARAM wPara
 		oss << std::left << std::setw(firstColWidth) << padss.str() << std::right;
 	}
 	oss << "  LP: 0x" << std::hex << std::setfill('0') << std::setw(8) << lParam;
-	oss << "  WP: 0x" << std::hex << std::setfill('0') << std::setw(8) << wParam;
+	oss << "  WP: 0x" << std::hex << std::setfill('0') << std::setw(8) << wParam << "\n";
 
 	return oss.str();
 }
