@@ -49,7 +49,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	case WM_LBUTTONDOWN:
 	{
 		const POINTS pt = MAKEPOINTS(lParam);
-		std::ostringstream oss = {};
+		std::ostringstream oss;
 		oss << "(" << pt.x << "," << pt.y << ")";
 		SetWindowTextA(hWnd, oss.str().c_str());
 	}

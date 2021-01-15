@@ -29,5 +29,8 @@
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\CustomHeaders.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
