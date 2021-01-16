@@ -39,7 +39,7 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 }
 
 
-Window::Window(int width, int height, const wchar_t* name) noexcept
+Window::Window(int width, int height, const wchar_t* name)
 {
 	//calculate window size based on desired client region size
 	RECT wr = { 0 };

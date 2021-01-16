@@ -3,26 +3,41 @@
 
 int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int mCmdShow)
 {
-	//Create Window
-	
-	Window wnd(360, 480, L"A New Window");
+	try{
+		//Create Window
 
-	// Listen for messages
+		Window wnd(360, 480, L"A New Window");
 
-	MSG msg = { 0 };
-	BOOL gResult;
-	while ((gResult = GetMessage(&msg, nullptr, 0 ,0)) > 0)
-	{
-		TranslateMessage(&msg);
-		DispatchMessage(&msg);
+		// Listen for messages
+
+		MSG msg = { 0 };
+		BOOL gResult;
+		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+		{
+			TranslateMessage(&msg);
+			DispatchMessage(&msg);
+		}
+
+		if (gResult == -1)
+		{
+			return -1;
+		}
+
+		return msg.wParam;
 	}
-
-	if (gResult == -1)
+	catch (const HandleException& e)
 	{
-		return -1;
+		MessageBoxA(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
 	}
-	
-	return msg.wParam;
+	catch (const std::exception& e)
+	{
+		MessageBoxA(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	catch (...)
+	{
+		MessageBoxA(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
+	}
+	return -1;
 }
 
 Window::Exception::Exception(int line, const char* file, HRESULT hr) noexcept
