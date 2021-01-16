@@ -1,7 +1,21 @@
 #pragma once
 #include "CustomHeaders.h"
+#include "HandleException.h"
 
 class Window {
+public:
+	class Exception : public HandleException
+	{
+	public:
+		Exception(int line, const char* file, HRESULT hr) noexcept; //HRESULT parameter stores the error code
+		const char* what() const noexcept override;
+		virtual const char* GetType() const noexcept override;
+		static std::string TranslateErrorCode(HRESULT hr) noexcept; //Outputs a description for the error code recieved
+		HRESULT GetErrorCode() const noexcept;
+		std::string GetErrorString() const noexcept;
+	private:
+		HRESULT hr;
+	};
 private:
 	class WindowClass {
 	public:
@@ -30,3 +44,6 @@ private:
 	int height;
 	HWND hWnd;
 };
+
+//error exception helper macro
+#define WND_EXCEPT(hr) Window::Exception(__LINE__, __FILE__, hr)
