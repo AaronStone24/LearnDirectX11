@@ -47,6 +47,9 @@
     <ClInclude Include="Source\Public\resource1.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Keyboard.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LearnDirectX121.rc">

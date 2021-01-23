@@ -102,6 +102,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
+    <ClInclude Include="Source\Public\Keyboard.h" />
     <ClInclude Include="Source\Public\resource1.h" />
     <ClInclude Include="Source\Public\Window.h" />
     <ClInclude Include="Source\Public\WindowsMessageMap.h" />
