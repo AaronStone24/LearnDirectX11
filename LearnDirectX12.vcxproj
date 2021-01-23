@@ -66,6 +66,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Source\Public\</AdditionalIncludeDirectories>
@@ -88,6 +90,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
     </Link>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Source\Public\</AdditionalIncludeDirectories>
@@ -95,6 +99,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\HandleException.cpp" />
+    <ClCompile Include="Source\Private\Keyboard.cpp" />
     <ClCompile Include="Source\Private\Window.cpp" />
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp" />
     <ClCompile Include="Source\Private\WinMain.cpp" />
