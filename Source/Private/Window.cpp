@@ -47,13 +47,21 @@ Window::Window(int width, int height, const wchar_t* name)
 	wr.right = width + wr.left;
 	wr.top = 100;
 	wr.bottom = height + wr.top;
-	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+	if (FAILED(AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE)))
+	{
+		throw WND_LAST_EXCEPT(); 
+	}
 
 	//create window & get the handle
 	hWnd = CreateWindow(
 		WindowClass::GetName(), name, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, CW_USEDEFAULT, CW_USEDEFAULT,
 		wr.right - wr.left, wr.bottom - wr.top, nullptr, nullptr, WindowClass::GetInstance(), this
 	);
+
+	if (hWnd == nullptr)
+	{
+		throw WND_LAST_EXCEPT();
+	}
 
 	//show Window
 	ShowWindow(hWnd, SW_SHOWDEFAULT);
