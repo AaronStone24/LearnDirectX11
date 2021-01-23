@@ -118,9 +118,14 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 
 	/*--------------- KEYBOARD MESSAGES --------------*/
 	case WM_KEYDOWN:
-		kbd.onKeyPressed(static_cast<unsigned char>(wParam));
+	case WM_SYSKEYDOWN:
+		if (!(lParam & 0x40000000) || kbd.AutorepeatIsEnabled())
+		{
+			kbd.onKeyPressed(static_cast<unsigned char>(wParam));
+		}
 		break;
 	case WM_KEYUP:
+	case WM_SYSKEYUP:
 		kbd.onKeyReleased(static_cast<unsigned char>(wParam));
 		break;
 	case WM_CHAR:
