@@ -40,7 +40,7 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 }
 
 
-Window::Window(int width, int height, const wchar_t* name)
+Window::Window(int width, int height, const wchar_t* name) : width(width), height(height)
 {
 	//calculate window size based on desired client region size
 	RECT wr = { 0 };
@@ -144,8 +144,33 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	/*--------------- MOUSE MESSAGES --------------*/
 	case WM_MOUSEMOVE:
 	{
-		POINTS pt = MAKEPOINTS(lParam);
+		const POINTS pt = MAKEPOINTS(lParam);
+		//if in client region: log move and capture mouse(if previously not in client region)
+		if (pt.x >= 0 && pt.x < width && pt.y >= 0 && pt.y < height)
+		{
+			mouse.OnMouseMove(pt.x, pt.y);
+			if (!mouse.IsInWindow())
+			{
+				SetCapture(hWnd);
+				mouse.OnMouseEnter();
+			}
+		}
+		//if not in client region: log move / maintain capture if the button is down
+		else
+		{
+			if (wParam & (MK_LBUTTON | MK_RBUTTON))
+			{
+				mouse.OnMouseMove(pt.x, pt.y);
+			}
+			//button up: release capture / log event for leaving
+			else
+			{
+				ReleaseCapture();
+				mouse.OnMouseLeave();
+			}
+		}
 		mouse.OnMouseMove(pt.x, pt.y);
+		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
