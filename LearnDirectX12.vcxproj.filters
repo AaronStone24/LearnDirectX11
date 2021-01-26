@@ -39,6 +39,9 @@
     <ClCompile Include="Source\Private\App.cpp">
       <Filter>Source\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Timer.cpp">
+      <Filter>Source\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
@@ -63,6 +66,9 @@
       <Filter>Source\Public</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\App.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Timer.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
   </ItemGroup>
