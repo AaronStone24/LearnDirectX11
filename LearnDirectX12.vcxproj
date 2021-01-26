@@ -98,6 +98,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Private\App.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
     <ClCompile Include="Source\Private\Keyboard.cpp" />
     <ClCompile Include="Source\Private\Mouse.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="Source\Private\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\Public\App.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
     <ClInclude Include="Source\Public\Keyboard.h" />
