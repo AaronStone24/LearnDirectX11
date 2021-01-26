@@ -81,6 +81,26 @@ void Window::SetTitle(const std::string& title)
 	}
 }
 
+std::optional<int> Window::ProcessMessages()
+{
+	MSG msg = { 0 };
+	//while queue has messages, view and dispatch them without blocking the loop
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		//PeekMessage does not signal quit via return
+		if (msg.message == WM_QUIT)
+		{
+			//return optional wrapping int
+			return msg.wParam;
+		}
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return {};
+}
+
 LRESULT WINAPI Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
 	//the this parameter passed in previous function contains information that is also contained in lpCreateParams in lParam of WM_NCCREATE
