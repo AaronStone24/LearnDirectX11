@@ -1,5 +1,6 @@
 #include "../Public/App.h"
 #include <sstream>
+#include <iomanip>
 
 App::App()
 	:
@@ -16,49 +17,8 @@ int App::Go()
 	{
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
-		if (wnd.kbd.KeyIsPressed(VK_SPACE))
-		{
-			MessageBoxA(nullptr, "Key Pressed", "Space bar was pressed", MB_OK | MB_ICONEXCLAMATION);
-		}
-		while (!wnd.mouse.IsEmpty())
-		{
-			const auto e = wnd.mouse.Read();
-			static int scrollCount = 0;
-			switch (e.GetType())
-			{
-			case Mouse::Event::Type::WheelUp:
-			{
-				++scrollCount;
-				std::ostringstream oss;
-				oss << "Up: " << abs(scrollCount);
-				wnd.SetTitle(oss.str());
-				break;
-			}
-			case Mouse::Event::Type::WheelDown:
-			{
-				--scrollCount;
-				std::ostringstream oss;
-				oss << "Up: " << abs(scrollCount);
-				wnd.SetTitle(oss.str());
-				break;
-			}
-			case Mouse::Event::Type::Leave:
-			{
-				wnd.SetTitle("Gone!");
-				break;
-			}
-			case Mouse::Event::Type::Move:
-			{
-				std::ostringstream oss;
-				oss << "Mouse position: (" << e.GetPosX() << "," << e.GetPosY() << ")";
-				wnd.SetTitle(oss.str());
-				break;
-			}
-			default:
-				break;
-			}
-
-		}
+		
+		DoFrame();
 	}
 
 	if (gResult == -1)
@@ -71,5 +31,8 @@ int App::Go()
 
 void App::DoFrame()
 {
-
+	const float t = timer.Peek();
+	std::ostringstream oss;
+	oss << "Time elapsed: " << std::setprecision(1) << std::fixed << t << "s";
+	wnd.SetTitle(oss.str());
 }
