@@ -23,8 +23,25 @@ int CALLBACK WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
 			while (!wnd.mouse.IsEmpty())
 			{
 				const auto e = wnd.mouse.Read();
+				static int scrollCount = 0;
 				switch (e.GetType())
 				{
+				case Mouse::Event::Type::WheelUp:
+				{
+					++scrollCount;
+					std::ostringstream oss;
+					oss << "Up: " << abs(scrollCount);
+					wnd.SetTitle(oss.str());
+					break;
+				}
+				case Mouse::Event::Type::WheelDown:
+				{
+					--scrollCount;
+					std::ostringstream oss;
+					oss << "Up: " << abs(scrollCount);
+					wnd.SetTitle(oss.str());
+					break;
+				}
 				case Mouse::Event::Type::Leave:
 				{
 					wnd.SetTitle("Gone!");
