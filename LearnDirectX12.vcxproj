@@ -99,6 +99,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App.cpp" />
+    <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
     <ClCompile Include="Source\Private\Keyboard.cpp" />
     <ClCompile Include="Source\Private\Mouse.cpp" />
@@ -110,6 +111,7 @@
   <ItemGroup>
     <ClInclude Include="Source\Public\App.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
+    <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
     <ClInclude Include="Source\Public\Keyboard.h" />
     <ClInclude Include="Source\Public\Mouse.h" />
