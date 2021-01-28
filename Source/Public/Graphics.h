@@ -10,8 +10,14 @@ public:
 	Graphics& operator=(const Graphics&) = delete;
 	~Graphics();
 	void EndFrame();
+	void ClearBuffer(float red, float green, float blue) noexcept
+	{
+		const float color[] = { red,green,blue,1.0f };
+		pContext->ClearRenderTargetView(mRenderTargetView, color);
+	}
 private:
 	ID3D11Device* pDevice = nullptr;
-	IDXGISwapChain* pSwap = nullptr;
+	IDXGISwapChain* pSwapChain = nullptr;
 	ID3D11DeviceContext* pContext = nullptr;
+	ID3D11RenderTargetView* mRenderTargetView = nullptr;
 };
