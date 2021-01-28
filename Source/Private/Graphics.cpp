@@ -53,3 +53,8 @@ Graphics::~Graphics()
 		pDevice->Release();
 	}
 }
+
+void Graphics::EndFrame()
+{
+	pSwap->Present(1u, 0u);
+}

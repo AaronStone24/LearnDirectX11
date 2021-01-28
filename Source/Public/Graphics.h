@@ -1,15 +1,15 @@
 #pragma once
-#include "Window.h"
+#include "CustomHeaders.h"
 #include <d3d11.h>
 
 class Graphics
 {
 public:
-	Graphics() = default;
 	Graphics(HWND hWnd);
 	Graphics(const Graphics&) = delete;
 	Graphics& operator=(const Graphics&) = delete;
 	~Graphics();
+	void EndFrame();
 private:
 	ID3D11Device* pDevice = nullptr;
 	IDXGISwapChain* pSwap = nullptr;
