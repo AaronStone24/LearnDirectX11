@@ -82,7 +82,21 @@ Graphics::Graphics(HWND hWnd)
 		&mDepthStencilView
 	);
 
+	//Bind the render target view and depth/stencil view to the pipeline
+	pContext->OMSetRenderTargets(
+		1u,
+		mRenderTargetView.GetAddressOf(), //don't have to release the renderTargetView here so using GetAddressOf()
+		mDepthStencilView.Get()
+	);
 
+	//set the viewport tansform
+	mScreenViewport.TopLeftX = 50;
+	mScreenViewport.TopLeftY = 50;
+	mScreenViewport.Width = 700.0f;
+	mScreenViewport.Height = 500.0f;
+	mScreenViewport.MinDepth = 0.0f;
+	mScreenViewport.MaxDepth = 1.0f;
+	pContext->RSSetViewports(1, &mScreenViewport);
 }
 
 void Graphics::EndFrame()

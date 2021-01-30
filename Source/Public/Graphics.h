@@ -22,4 +22,5 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView = nullptr;
+	D3D11_VIEWPORT mScreenViewport;
 };
