@@ -1,5 +1,7 @@
 #include "../Public/Graphics.h"
 
+namespace wrl = Microsoft::WRL;
+
 #pragma comment(lib,"d3d11.lib")
 
 Graphics::Graphics(HWND hWnd)
@@ -44,37 +46,23 @@ Graphics::Graphics(HWND hWnd)
 		&pContext
 	);
 	//gain access to texture subresource in swap chain (back buffer)
-	ID3D11Resource* pBackBuffer = nullptr;
-	pSwapChain->GetBuffer(0, __uuidof(ID3D11Resource), reinterpret_cast<void**>(&pBackBuffer));
+	wrl::ComPtr<ID3D11Resource> pBackBuffer = nullptr;
+	pSwapChain->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer);
 	pDevice->CreateRenderTargetView(
-		pBackBuffer,
+		pBackBuffer.Get(),
 		nullptr,
 		&mRenderTargetView
 	);
 	pBackBuffer->Release();
 }
 
-Graphics::~Graphics()
-{
-	if (mRenderTargetView != nullptr)
-	{
-		mRenderTargetView->Release();
-	}
-	if (pContext != nullptr)
-	{
-		pContext->Release();
-	}
-	if (pSwapChain != nullptr)
-	{
-		pSwapChain->Release();
-	}
-	if (pDevice != nullptr)
-	{
-		pDevice->Release();
-	}
-}
-
 void Graphics::EndFrame()
 {
 	pSwapChain->Present(1u, 0u); 
+}
+
+void Graphics::ClearBuffer(float red, float green, float blue) noexcept
+{
+	const float color[] = { red,green,blue,1.0f };
+	pContext->ClearRenderTargetView(mRenderTargetView.Get(), color);
 }
