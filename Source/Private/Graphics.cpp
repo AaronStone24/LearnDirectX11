@@ -6,6 +6,7 @@ namespace wrl = Microsoft::WRL;
 
 Graphics::Graphics(HWND hWnd)
 {
+	//Swap Chain descriptor
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc.Width = 0;
 	sd.BufferDesc.Height = 0;
@@ -24,7 +25,6 @@ Graphics::Graphics(HWND hWnd)
 	sd.Flags = 0;
 
 	UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
-
 #if defined(_DEBUG)
 	// If the project is in a debug build, enable the debug layer.
 	creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
@@ -45,6 +45,7 @@ Graphics::Graphics(HWND hWnd)
 		nullptr,
 		&pContext
 	);
+
 	//gain access to texture subresource in swap chain (back buffer)
 	wrl::ComPtr<ID3D11Resource> pBackBuffer = nullptr;
 	pSwapChain->GetBuffer(0, __uuidof(ID3D11Resource), &pBackBuffer);
@@ -53,7 +54,35 @@ Graphics::Graphics(HWND hWnd)
 		nullptr,
 		&mRenderTargetView
 	);
-	pBackBuffer->Release();
+
+	//depth/stencil buffer descriptor
+	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
+	depthStencilDesc.Width = 0;
+	depthStencilDesc.Height = 0;
+	depthStencilDesc.MipLevels = 0;
+	depthStencilDesc.ArraySize = 1u;
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthStencilDesc.SampleDesc.Count = 1;
+	depthStencilDesc.SampleDesc.Quality = 0;
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+
+	//create the depth/stencil buffer and view
+	wrl::ComPtr<ID3D11Texture2D> mDepthStencilBuffer = nullptr;
+	pDevice->CreateTexture2D(
+		&depthStencilDesc,
+		0,
+		&mDepthStencilBuffer
+	);
+	pDevice->CreateDepthStencilView(
+		mDepthStencilBuffer.Get(),
+		0,
+		&mDepthStencilView
+	);
+
+
 }
 
 void Graphics::EndFrame()

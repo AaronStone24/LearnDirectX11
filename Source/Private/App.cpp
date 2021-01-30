@@ -4,7 +4,7 @@
 
 App::App()
 	:
-	wnd(800, 600, L"A new Window")
+	wnd(800, 600, L"D3D11 Application")
 {}
 
 int App::Go()
