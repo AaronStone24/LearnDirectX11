@@ -4,7 +4,7 @@
 
 App::App()
 	:
-	wnd(800, 600, L"D3D11 Application")
+	wnd(1080, 720, L"D3D11 Application")
 {}
 
 int App::Go()
@@ -25,6 +25,7 @@ void App::DoFrame()
 {
 	const float c = sin(timer.Peek()) / 2.0f + 0.5f;
 	wnd.Gfx().ClearBuffer(c, c, 1.0f);
+	wnd.Gfx().DrawTestTriangle();
 	//presenting the frame here
 	wnd.Gfx().EndFrame();
 }
