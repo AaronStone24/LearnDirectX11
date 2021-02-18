@@ -1,10 +1,28 @@
 #pragma once
 #include "CustomHeaders.h"
+#include "HandleException.h"
 #include <d3d11.h>
 #include <wrl.h>
+#include <vector>
+#include "Window.h"
 
 class Graphics
 {
+public:
+	class Exception : public HandleException
+	{
+		using HandleException::HandleException;
+	};
+	class InfoException : public Exception
+	{
+	public:
+		InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept;
+		const char* what() const noexcept override;
+		const char* GetType() const noexcept override;
+		std::string GetErrorInfo() const noexcept;
+	private:
+		std::string info;
+	};
 public:
 	Graphics(HWND hWnd);
 	Graphics(const Graphics&) = delete;
