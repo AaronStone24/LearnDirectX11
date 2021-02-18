@@ -57,49 +57,6 @@ Graphics::Graphics(HWND hWnd)
 		nullptr,
 		&mRenderTargetView
 	);
-
-	//depth/stencil buffer descriptor
-	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
-	depthStencilDesc.Width = 0;
-	depthStencilDesc.Height = 0;
-	depthStencilDesc.MipLevels = 0;
-	depthStencilDesc.ArraySize = 1u;
-	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	depthStencilDesc.SampleDesc.Count = 1;
-	depthStencilDesc.SampleDesc.Quality = 0;
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.CPUAccessFlags = 0;
-	depthStencilDesc.MiscFlags = 0;
-
-	//create the depth/stencil buffer and view
-	wrl::ComPtr<ID3D11Texture2D> mDepthStencilBuffer = nullptr;
-	pDevice->CreateTexture2D(
-		&depthStencilDesc,
-		0,
-		&mDepthStencilBuffer
-	);
-	pDevice->CreateDepthStencilView(
-		mDepthStencilBuffer.Get(),
-		0,
-		&mDepthStencilView
-	);
-
-	//Bind the render target view and depth/stencil view to the pipeline
-	pContext->OMSetRenderTargets(
-		1u,
-		mRenderTargetView.GetAddressOf(), //don't have to release the renderTargetView here so using GetAddressOf()
-		mDepthStencilView.Get()
-	);
-
-	//set the viewport tansform
-	mScreenViewport.TopLeftX = 50;
-	mScreenViewport.TopLeftY = 50;
-	mScreenViewport.Width = 700.0f;
-	mScreenViewport.Height = 500.0f;
-	mScreenViewport.MinDepth = 0.0f;
-	mScreenViewport.MaxDepth = 1.0f;
-	pContext->RSSetViewports(1, &mScreenViewport);
 }
 
 void Graphics::EndFrame()
@@ -157,6 +114,17 @@ void Graphics::DrawTestTriangle()
 	//bind vertex shader
 	pContext->VSSetShader(pVertexShader.Get(), nullptr, 0u);
 
+	//input (vertex) layout (2d position only)
+	wrl::ComPtr<ID3D11InputLayout> pInputLayout;
+	const D3D11_INPUT_ELEMENT_DESC ied[] =
+	{
+		{"POSITION",0,DXGI_FORMAT_R32G32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0},
+	};
+	pDevice->CreateInputLayout(ied, (UINT)std::size(ied), pBlob->GetBufferPointer(), pBlob->GetBufferSize(), &pInputLayout);
+
+	//bind vertex layout
+	pContext->IASetInputLayout(pInputLayout.Get());
+
 	//create pixel shader
 	wrl::ComPtr<ID3D11PixelShader> pPixelShader;
 	D3DReadFileToBlob(L"PixelShader.cso", &pBlob);
@@ -164,6 +132,54 @@ void Graphics::DrawTestTriangle()
 
 	//bind pixel shader
 	pContext->PSSetShader(pPixelShader.Get(), nullptr, 0u);
+
+	//depth/stencil buffer descriptor
+	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
+	depthStencilDesc.Width = 0;
+	depthStencilDesc.Height = 0;
+	depthStencilDesc.MipLevels = 0;
+	depthStencilDesc.ArraySize = 1u;
+	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+	depthStencilDesc.SampleDesc.Count = 1;
+	depthStencilDesc.SampleDesc.Quality = 0;
+	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthStencilDesc.CPUAccessFlags = 0;
+	depthStencilDesc.MiscFlags = 0;
+
+	//create the depth/stencil buffer and view
+	wrl::ComPtr<ID3D11Texture2D> mDepthStencilBuffer = nullptr;
+	pDevice->CreateTexture2D(
+		&depthStencilDesc,
+		0,
+		&mDepthStencilBuffer
+	);
+	pDevice->CreateDepthStencilView(
+		mDepthStencilBuffer.Get(),
+		0,
+		&mDepthStencilView
+	);
+
+	//Bind the render target view and depth/stencil view to the pipeline
+	pContext->OMSetRenderTargets(
+		1u,
+		mRenderTargetView.GetAddressOf(), //don't have to release the renderTargetView here so using GetAddressOf()
+		//mDepthStencilView.Get()
+		nullptr
+	);
+
+	//Set primitive topology to triangle list (group of 3 vertices)
+	pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	//set the viewport tansform
+	D3D11_VIEWPORT mScreenViewport = {};
+	mScreenViewport.TopLeftX = 0;
+	mScreenViewport.TopLeftY = 0;
+	mScreenViewport.Width = 700.0f;
+	mScreenViewport.Height = 500.0f;
+	mScreenViewport.MinDepth = 0.0f;
+	mScreenViewport.MaxDepth = 1.0f;
+	pContext->RSSetViewports(1, &mScreenViewport);
 
 	pContext->Draw((UINT)std::size(vertices), 0u);
 }
