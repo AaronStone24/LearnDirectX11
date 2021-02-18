@@ -4,7 +4,6 @@
 #include <d3d11.h>
 #include <wrl.h>
 #include <vector>
-#include "Window.h"
 
 class Graphics
 {
