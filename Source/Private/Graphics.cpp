@@ -76,12 +76,18 @@ void Graphics::DrawTestTriangle()
 
 	struct Vertex
 	{
-		float x;
-		float y;
-		unsigned char r;
-		unsigned char g;
-		unsigned char b;
-		unsigned char a;
+		struct
+		{
+			float x;
+			float y;
+		}pos;
+		struct
+		{
+			unsigned char r;
+			unsigned char g;
+			unsigned char b;
+			unsigned char a;
+		}color;
 	};
 
 	const Vertex vertices[] =
@@ -89,6 +95,9 @@ void Graphics::DrawTestTriangle()
 		{0.0f, 0.5f, 255, 0, 0, 0},
 		{0.5f, -0.5f, 0, 255, 0, 0},
 		{-0.5f, -0.5f, 0, 0, 255, 0},
+		{-0.3f, 0.3f, 0, 255, 0, 0},
+		{0.3f, 0.3f, 0, 0, 255, 0},
+		{0.0f, -0.8f, 255, 0, 0, 0}
 	};
 
 	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
@@ -99,7 +108,6 @@ void Graphics::DrawTestTriangle()
 	bd.MiscFlags = 0u;
 	bd.ByteWidth = sizeof(vertices);
 	bd.StructureByteStride = sizeof(Vertex);
-
 	D3D11_SUBRESOURCE_DATA sd = {};
 	sd.pSysMem = vertices;
 	pDevice->CreateBuffer(&bd, &sd, &pVertexBuffer);
@@ -108,6 +116,29 @@ void Graphics::DrawTestTriangle()
 	const UINT stride = sizeof(Vertex);
 	const UINT offset = 0u;
 	pContext->IASetVertexBuffers(0u, 1u, pVertexBuffer.GetAddressOf(), &stride, &offset);
+
+	//create index buffer
+	const unsigned short indices[] =
+	{
+		0,1,2,
+		0,2,3,
+		0,4,1,
+		2,1,5,
+	};
+	wrl::ComPtr<ID3D11Buffer> pIndexBuffer;
+	D3D11_BUFFER_DESC ibd = {};
+	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	ibd.Usage = D3D11_USAGE_DEFAULT;
+	ibd.CPUAccessFlags = 0u;
+	ibd.MiscFlags = 0u;
+	ibd.ByteWidth = (UINT)sizeof(indices);
+	ibd.StructureByteStride = (UINT)sizeof(unsigned short);
+	D3D11_SUBRESOURCE_DATA isd = {};
+	isd.pSysMem = indices;
+	pDevice->CreateBuffer(&ibd, &isd, &pIndexBuffer);
+
+	//bind index buffer
+	pContext->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u);
 
 	//create Vertex shader
 	wrl::ComPtr<ID3D11VertexShader> pVertexShader;
@@ -186,7 +217,7 @@ void Graphics::DrawTestTriangle()
 	mScreenViewport.MaxDepth = 1.0f;
 	pContext->RSSetViewports(1, &mScreenViewport);
 
-	pContext->Draw((UINT)std::size(vertices), 0u);
+	pContext->DrawIndexed((UINT)std::size(indices), 0u, 0u);
 }
 
 Graphics::InfoException::InfoException(int line, const char* file, std::vector<std::string> infoMsgs) noexcept
