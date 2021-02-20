@@ -29,7 +29,7 @@ public:
 	~Graphics() = default;
 	void EndFrame();
 	void ClearBuffer(float red, float green, float blue) noexcept;
-	void DrawTestTriangle();
+	void DrawTestTriangle(float angle);
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice = nullptr;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwapChain = nullptr;
