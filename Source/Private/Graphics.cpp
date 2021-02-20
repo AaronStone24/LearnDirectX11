@@ -1,6 +1,7 @@
 #include "../Public/Graphics.h"
 #include <sstream>
 #include <d3dcompiler.h>
+#include <DirectXMath.h>
 
 namespace wrl = Microsoft::WRL;
 
@@ -143,19 +144,16 @@ void Graphics::DrawTestTriangle(float angle)
 	//create constant buffer for transformation matrix
 	struct ConstantBuffer
 	{
-		struct
-		{
-			float element[4][4];
-		} transformation;
+		DirectX::XMMATRIX transform;
 	};
 
 	const ConstantBuffer cb =
 	{
 		{
-			(5.0f / 7.0f) * std::cos(angle), std::sin(angle), 0.0f, 0.0f,
-			(5.0f / 7.0f) * -std::sin(angle), std::cos(angle), 0.0f, 0.0f,
-			0.0f, 0.0f, 1.0f, 0.0f,
-			0.0f, 0.0f, 0.0f, 1.0f
+			DirectX::XMMatrixTranspose(
+				DirectX::XMMatrixRotationZ(angle) *
+				DirectX::XMMatrixScaling(5.0f / 7.0f, 1.0f, 1.0f)
+			)
 		}
 	};
 

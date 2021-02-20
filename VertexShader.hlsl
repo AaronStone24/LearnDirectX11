@@ -6,7 +6,7 @@ struct VSOut
 
 cbuffer CBuf
 {
-	row_major matrix transform;	// the gpu considers matrix as row majors
+	matrix transform;	// the hlsl considers matrix as column majors
 };
 
 VSOut main(float2 pos : POSITION, float3 color: COLOR)
