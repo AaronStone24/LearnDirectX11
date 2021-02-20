@@ -71,7 +71,7 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 	pContext->ClearRenderTargetView(mRenderTargetView.Get(), color);
 }
 
-void Graphics::DrawTestTriangle(float angle)
+void Graphics::DrawTestTriangle(float angle, float x, float y)
 {
 	namespace wrl = Microsoft::WRL;
 
@@ -152,7 +152,8 @@ void Graphics::DrawTestTriangle(float angle)
 		{
 			DirectX::XMMatrixTranspose(
 				DirectX::XMMatrixRotationZ(angle) *
-				DirectX::XMMatrixScaling(5.0f / 7.0f, 1.0f, 1.0f)
+				DirectX::XMMatrixScaling(5.0f / 7.0f, 1.0f, 1.0f) *
+				DirectX::XMMatrixTranslation(x, y, 0.0f)
 			)
 		}
 	};
