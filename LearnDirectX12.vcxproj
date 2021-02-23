@@ -102,6 +102,7 @@
     <ClCompile Include="Source\Private\Bindable\Bindable.cpp" />
     <ClCompile Include="Source\Private\Bindable\IndexBuffer.cpp" />
     <ClCompile Include="Source\Private\Bindable\InputLayout.cpp" />
+    <ClCompile Include="Source\Private\Bindable\PixelShader.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Source\Public\Bindable\ConstantBuffers.h" />
     <ClInclude Include="Source\Public\Bindable\IndexBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\InputLayout.h" />
+    <ClInclude Include="Source\Public\Bindable\PixelShader.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Graphics.h" />

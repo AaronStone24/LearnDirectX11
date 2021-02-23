@@ -4,6 +4,9 @@
 #include <d3d11.h>
 #include <wrl.h>
 #include <vector>
+#include <memory>
+#include <random>
+#include <d3dcompiler.h>
 
 class Graphics
 {
