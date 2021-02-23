@@ -28,6 +28,9 @@
     <Filter Include="Source\Private\Bindable">
       <UniqueIdentifier>{0a0d419f-182b-49e4-8f57-ea76ea7e8001}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Private\Drawable">
+      <UniqueIdentifier>{58266e8e-4910-4628-aeef-b078260169b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp">
@@ -59,6 +62,9 @@
     </ClCompile>
     <ClCompile Include="Source\Private\Bindable\Bindable.cpp">
       <Filter>Source\Private\Bindable</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Drawable\Drawable.cpp">
+      <Filter>Source\Private\Drawable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,6 +106,9 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\ConstantBuffers.h">
       <Filter>Source\Public\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Drawable\Drawable.h">
+      <Filter>Source\Public\Drawable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

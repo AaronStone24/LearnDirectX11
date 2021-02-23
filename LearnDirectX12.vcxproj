@@ -100,6 +100,7 @@
   <ItemGroup>
     <ClCompile Include="Source\Private\App.cpp" />
     <ClCompile Include="Source\Private\Bindable\Bindable.cpp" />
+    <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
     <ClCompile Include="Source\Private\Keyboard.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="Source\Public\Bindable\BindableBase.h" />
     <ClInclude Include="Source\Public\Bindable\ConstantBuffers.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
+    <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
     <ClInclude Include="Source\Public\Keyboard.h" />
