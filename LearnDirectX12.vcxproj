@@ -99,6 +99,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App.cpp" />
+    <ClCompile Include="Source\Private\Bindable\Bindable.cpp" />
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
     <ClCompile Include="Source\Private\Keyboard.cpp" />
@@ -110,6 +111,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\App.h" />
+    <ClInclude Include="Source\Public\Bindable\Bindable.h" />
+    <ClInclude Include="Source\Public\Bindable\BindableBase.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />

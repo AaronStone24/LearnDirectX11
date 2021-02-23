@@ -25,6 +25,9 @@
     <Filter Include="Source\Public\Drawable">
       <UniqueIdentifier>{232b771c-98f1-4e5e-845a-4ca892503e47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Private\Bindable">
+      <UniqueIdentifier>{0a0d419f-182b-49e4-8f57-ea76ea7e8001}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="Source\Private\Graphics.cpp">
       <Filter>Source\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Bindable.cpp">
+      <Filter>Source\Private\Bindable</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +91,12 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Graphics.h">
       <Filter>Source\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Bindable.h">
+      <Filter>Source\Public\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\BindableBase.h">
+      <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

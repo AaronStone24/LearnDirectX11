@@ -7,6 +7,7 @@
 
 class Graphics
 {
+	friend class Bindable;
 public:
 	class Exception : public HandleException
 	{
