@@ -58,6 +58,58 @@ Graphics::Graphics(HWND hWnd)
 		nullptr,
 		&mRenderTargetView
 	);
+
+	//depth/stencil buffer descriptor
+	D3D11_DEPTH_STENCIL_DESC depthStencilDesc = {};
+	depthStencilDesc.DepthEnable = true;
+	depthStencilDesc.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthFunc = D3D11_COMPARISON_LESS;
+	wrl::ComPtr<ID3D11DepthStencilState> pDSState;
+	pDevice->CreateDepthStencilState(&depthStencilDesc, &pDSState);
+
+	//bind depth state
+	pContext->OMSetDepthStencilState(pDSState.Get(), 1u);
+
+	//depth/stencil buffer descriptor
+	D3D11_TEXTURE2D_DESC depthTextureDesc = {};
+	depthTextureDesc.Width = 1080u;
+	depthTextureDesc.Height = 720u;
+	depthTextureDesc.MipLevels = 1u;
+	depthTextureDesc.ArraySize = 1u;
+	depthTextureDesc.Format = DXGI_FORMAT_D32_FLOAT;
+	depthTextureDesc.SampleDesc.Count = 1u;
+	depthTextureDesc.SampleDesc.Quality = 0u;
+	depthTextureDesc.Usage = D3D11_USAGE_DEFAULT;
+	depthTextureDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+	depthTextureDesc.CPUAccessFlags = 0u;
+	depthTextureDesc.MiscFlags = 0u;
+
+	//create the depth/stencil buffer and view
+	wrl::ComPtr<ID3D11Texture2D> mDepthStencilBuffer = nullptr;
+	pDevice->CreateTexture2D(
+		&depthTextureDesc,
+		nullptr,
+		&mDepthStencilBuffer
+	);
+
+	//create depth stencil texture view
+	D3D11_DEPTH_STENCIL_VIEW_DESC DSVdesc = {};
+	DSVdesc.Format = DXGI_FORMAT_D32_FLOAT;
+	DSVdesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
+	DSVdesc.Texture2D.MipSlice = 0u;
+	pDevice->CreateDepthStencilView(
+		mDepthStencilBuffer.Get(),
+		&DSVdesc,
+		&mDepthStencilView
+	);
+
+	//Bind the render target view and depth/stencil view to the pipeline
+	pContext->OMSetRenderTargets(
+		1u,
+		mRenderTargetView.GetAddressOf(), //don't have to release the renderTargetView here so using GetAddressOf()
+		mDepthStencilView.Get()
+	);
+
 }
 
 void Graphics::EndFrame()
@@ -69,9 +121,10 @@ void Graphics::ClearBuffer(float red, float green, float blue) noexcept
 {
 	const float color[] = { red,green,blue,1.0f };
 	pContext->ClearRenderTargetView(mRenderTargetView.Get(), color);
+	pContext->ClearDepthStencilView(mDepthStencilView.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 
-void Graphics::DrawTestTriangle(float angle, float x, float y)
+void Graphics::DrawTestTriangle(float angle, float x, float z)
 {
 	namespace wrl = Microsoft::WRL;
 
@@ -161,7 +214,7 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 			DirectX::XMMatrixTranspose(
 				DirectX::XMMatrixRotationZ(angle) *
 				DirectX::XMMatrixRotationX(angle) *
-				DirectX::XMMatrixTranslation(x, y, 4.0f) *
+				DirectX::XMMatrixTranslation(x, 0.0f, z + 4.0f) *
 				DirectX::XMMatrixPerspectiveLH(1.0f, 5.0f / 7.0f, 0.5f, 10.0f)
 			)
 		}
@@ -245,41 +298,6 @@ void Graphics::DrawTestTriangle(float angle, float x, float y)
 
 	//bind pixel shader
 	pContext->PSSetShader(pPixelShader.Get(), nullptr, 0u);
-
-	//depth/stencil buffer descriptor
-	D3D11_TEXTURE2D_DESC depthStencilDesc = {};
-	depthStencilDesc.Width = 0;
-	depthStencilDesc.Height = 0;
-	depthStencilDesc.MipLevels = 0;
-	depthStencilDesc.ArraySize = 1u;
-	depthStencilDesc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
-	depthStencilDesc.SampleDesc.Count = 1;
-	depthStencilDesc.SampleDesc.Quality = 0;
-	depthStencilDesc.Usage = D3D11_USAGE_DEFAULT;
-	depthStencilDesc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
-	depthStencilDesc.CPUAccessFlags = 0;
-	depthStencilDesc.MiscFlags = 0;
-
-	//create the depth/stencil buffer and view
-	wrl::ComPtr<ID3D11Texture2D> mDepthStencilBuffer = nullptr;
-	pDevice->CreateTexture2D(
-		&depthStencilDesc,
-		0,
-		&mDepthStencilBuffer
-	);
-	pDevice->CreateDepthStencilView(
-		mDepthStencilBuffer.Get(),
-		0,
-		&mDepthStencilView
-	);
-
-	//Bind the render target view and depth/stencil view to the pipeline
-	pContext->OMSetRenderTargets(
-		1u,
-		mRenderTargetView.GetAddressOf(), //don't have to release the renderTargetView here so using GetAddressOf()
-		//mDepthStencilView.Get()
-		nullptr
-	);
 
 	//Set primitive topology to triangle list (group of 3 vertices)
 	pContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
