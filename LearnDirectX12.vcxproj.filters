@@ -75,6 +75,9 @@
     <ClCompile Include="Source\Private\Bindable\PixelShader.cpp">
       <Filter>Source\Private\Bindable</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\Topology.cpp">
+      <Filter>Source\Private\Bindable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
@@ -126,6 +129,9 @@
       <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\PixelShader.h">
+      <Filter>Source\Public\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\Topology.h">
       <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
