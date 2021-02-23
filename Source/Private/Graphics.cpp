@@ -109,7 +109,6 @@ Graphics::Graphics(HWND hWnd)
 		mRenderTargetView.GetAddressOf(), //don't have to release the renderTargetView here so using GetAddressOf()
 		mDepthStencilView.Get()
 	);
-
 }
 
 void Graphics::EndFrame()

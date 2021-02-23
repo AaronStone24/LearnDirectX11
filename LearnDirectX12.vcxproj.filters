@@ -19,6 +19,12 @@
     <Filter Include="Source\Shader">
       <UniqueIdentifier>{92396a82-c552-485a-9325-a0437bdbc6da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Public\Bindable">
+      <UniqueIdentifier>{83635ef7-1ce1-4c74-bf62-b05fe31bf0e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Public\Drawable">
+      <UniqueIdentifier>{232b771c-98f1-4e5e-845a-4ca892503e47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp">
