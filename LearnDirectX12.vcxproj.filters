@@ -66,6 +66,9 @@
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp">
       <Filter>Source\Private\Drawable</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\IndexBuffer.cpp">
+      <Filter>Source\Private\Bindable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
@@ -109,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Drawable\Drawable.h">
       <Filter>Source\Public\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\IndexBuffer.h">
+      <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
