@@ -113,6 +113,7 @@
     <ClInclude Include="Source\Public\App.h" />
     <ClInclude Include="Source\Public\Bindable\Bindable.h" />
     <ClInclude Include="Source\Public\Bindable\BindableBase.h" />
+    <ClInclude Include="Source\Public\Bindable\ConstantBuffers.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />

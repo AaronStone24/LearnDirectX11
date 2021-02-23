@@ -98,6 +98,9 @@
     <ClInclude Include="Source\Public\Bindable\BindableBase.h">
       <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\ConstantBuffers.h">
+      <Filter>Source\Public\Bindable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LearnDirectX121.rc">
