@@ -84,6 +84,9 @@
     <ClCompile Include="Source\Private\Bindable\VertexBuffer.cpp">
       <Filter>Source\Private\Bindable</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Bindable\VertexShader.cpp">
+      <Filter>Source\Private\Bindable</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
@@ -144,6 +147,9 @@
       <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\VertexBuffer.h">
+      <Filter>Source\Public\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Bindable\VertexShader.h">
       <Filter>Source\Public\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
