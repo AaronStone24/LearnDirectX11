@@ -105,6 +105,7 @@
     <ClCompile Include="Source\Private\Bindable\PixelShader.cpp" />
     <ClCompile Include="Source\Private\Bindable\Topology.cpp" />
     <ClCompile Include="Source\Private\Bindable\TransformCBuf.cpp" />
+    <ClCompile Include="Source\Private\Bindable\VertexBuffer.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
@@ -125,6 +126,7 @@
     <ClInclude Include="Source\Public\Bindable\PixelShader.h" />
     <ClInclude Include="Source\Public\Bindable\Topology.h" />
     <ClInclude Include="Source\Public\Bindable\TransformCBuf.h" />
+    <ClInclude Include="Source\Public\Bindable\VertexBuffer.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
