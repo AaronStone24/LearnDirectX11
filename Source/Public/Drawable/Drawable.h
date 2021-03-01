@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include "../Graphics.h"
+#include "../Bindable/IndexBuffer.h"
 #include <memory>
 
 class Bindable;
