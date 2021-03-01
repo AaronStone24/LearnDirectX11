@@ -87,6 +87,9 @@
     <ClCompile Include="Source\Private\Bindable\VertexShader.cpp">
       <Filter>Source\Private\Bindable</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Box.cpp">
+      <Filter>Source\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
@@ -151,6 +154,9 @@
     </ClInclude>
     <ClInclude Include="Source\Public\Bindable\VertexShader.h">
       <Filter>Source\Public\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\Box.h">
+      <Filter>Source\Public</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
