@@ -158,6 +158,9 @@
     <ClInclude Include="Source\Public\Box.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Drawable\DrawableBase.h">
+      <Filter>Source\Public\Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LearnDirectX121.rc">

@@ -133,6 +133,7 @@
     <ClInclude Include="Source\Public\Box.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
+    <ClInclude Include="Source\Public\Drawable\DrawableBase.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
     <ClInclude Include="Source\Public\Keyboard.h" />
