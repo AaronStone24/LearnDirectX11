@@ -1,6 +1,6 @@
 #include "../../Public/Bindable/Topology.h"
 
-Topology::Topology(Graphics& gfx, D3D11_PRIMITIVE_TOPOLOGY type)
+Topology::Topology(Graphics& gfx, D3D11_PRIMITIVE_TOPOLOGY type) noexcept
 	:
 	type(type)
 {}
