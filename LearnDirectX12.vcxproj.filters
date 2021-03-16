@@ -164,6 +164,9 @@
     <ClInclude Include="Source\Public\IndexedTriangleList.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Cube.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LearnDirectX121.rc">

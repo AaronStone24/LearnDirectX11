@@ -131,6 +131,7 @@
     <ClInclude Include="Source\Public\Bindable\VertexBuffer.h" />
     <ClInclude Include="Source\Public\Bindable\VertexShader.h" />
     <ClInclude Include="Source\Public\Box.h" />
+    <ClInclude Include="Source\Public\Cube.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Drawable\DrawableBase.h" />
