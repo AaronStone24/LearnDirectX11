@@ -1,5 +1,6 @@
 #include "../Public/Box.h"
 #include "../Public/Bindable/BindableBase.h"
+#include "../Public/Cube.h"
 
 Box::Box(Graphics& gfx,
 	std::mt19937& rng,
@@ -23,30 +24,20 @@ Box::Box(Graphics& gfx,
 	{
 		struct Vertex1
 		{
-			DirectX::XMFLOAT3 Pos;
-			DirectX::XMFLOAT3 Color;
+			DirectX::XMFLOAT3 pos;
+			DirectX::XMFLOAT4 color;
 		};
 
 		struct Vertex2
 		{
-			DirectX::XMFLOAT3 Pos;
-			DirectX::XMFLOAT3 Normal;
-			DirectX::XMFLOAT2 Tex0;
-			DirectX::XMFLOAT2 Tex1;
+			DirectX::XMFLOAT3 pos;
+			DirectX::XMFLOAT3 normal;
+			DirectX::XMFLOAT2 tex0;
+			DirectX::XMFLOAT2 tex1;
 		};
 
-		const std::vector<Vertex> vertices =
-		{
-			{ -1.0f,-1.0f,-1.0f },
-			{ 1.0f,-1.0f,-1.0f },
-			{ -1.0f,1.0f,-1.0f },
-			{ 1.0f,1.0f,-1.0f },
-			{ -1.0f,-1.0f,1.0f },
-			{ 1.0f,-1.0f,1.0f },
-			{ -1.0f,1.0f,1.0f },
-			{ 1.0f,1.0f,1.0f },
-		};
-		AddStaticBind(std::make_unique<VertexBuffer>(gfx, vertices));
+		auto model = Cube::Make<Vertex1>();
+		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
 		auto pvs = std::make_unique<VertexShader>(gfx, L"VertexShader.cso");
 		auto pvsbc = pvs->GetByteCode();
@@ -54,18 +45,9 @@ Box::Box(Graphics& gfx,
 
 		AddStaticBind(std::make_unique<PixelShader>(gfx, L"PixelShader.cso"));
 
-		const std::vector<unsigned short> indices =
-		{
-			0,2,1, 2,3,1,
-			1,3,5, 3,7,5,
-			2,6,3, 3,6,7,
-			4,5,7, 4,7,6,
-			0,4,2, 2,4,6,
-			0,1,4, 1,5,4
-		};
-		AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, indices));
-
-		struct ConstantBuffer2
+		AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
+		/*
+		struct ConstantBuffer
 		{
 			struct
 			{
@@ -75,7 +57,7 @@ Box::Box(Graphics& gfx,
 				float a;
 			}face_colors[6];
 		};
-		const ConstantBuffer2 cb2 =
+		const ConstantBuffer cb2 =
 		{
 			{
 				{ 1.0f,0.0f,1.0f },
@@ -86,8 +68,8 @@ Box::Box(Graphics& gfx,
 				{ 0.0f,1.0f,1.0f },
 			}
 		};
-		AddStaticBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));
-
+		AddStaticBind(std::make_unique<PixelConstantBuffer<ConstantBuffer>>(gfx, cb2));
+		*/
 		//input layout desc for vertex1
 		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied1 =
 		{

@@ -1,6 +1,6 @@
 cbuffer CBuf
 {
-	matrix transform;	// the hlsl considers matrix as column majors
+	matrix gWorldViewProj;	// the hlsl considers matrix as column majors
 };
 
 struct VS_VERTEX
@@ -9,10 +9,10 @@ struct VS_VERTEX
 	float4 col : COLOR;
 };
 
-VS_VERTEX main(float3 pos : POSITION, float3 col : COLOR)
+VS_VERTEX main(float3 pos : POSITION, float4 col : COLOR)
 {
 	VS_VERTEX outVertex;
-	outVertex.pos = mul(float4(pos, 1.0f), transform);
-	outVertex.col = { col.x, col.y, col.z, 1.0f };
+	outVertex.pos = mul(float4(pos, 1.0f), gWorldViewProj);
+	outVertex.col = col;
 	return outVertex;
 }

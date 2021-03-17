@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 
 using namespace DirectX;
-#define XMGLOBALCONST extern CONST __declspec(selectany)
+//#define XMGLOBALCONST extern CONST __declspec(selectany)
 
 namespace Colors
 {
