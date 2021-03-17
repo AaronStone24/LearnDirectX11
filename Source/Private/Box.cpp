@@ -21,15 +21,20 @@ Box::Box(Graphics& gfx,
 {
 	if (!IsStaticInitialized())
 	{
-		struct Vertex
+		struct Vertex1
 		{
-			struct
-			{
-				float x;
-				float y;
-				float z;
-			}pos;
+			DirectX::XMFLOAT3 Pos;
+			DirectX::XMFLOAT3 Color;
 		};
+
+		struct Vertex2
+		{
+			DirectX::XMFLOAT3 Pos;
+			DirectX::XMFLOAT3 Normal;
+			DirectX::XMFLOAT2 Tex0;
+			DirectX::XMFLOAT2 Tex1;
+		};
+
 		const std::vector<Vertex> vertices =
 		{
 			{ -1.0f,-1.0f,-1.0f },
@@ -83,11 +88,23 @@ Box::Box(Graphics& gfx,
 		};
 		AddStaticBind(std::make_unique<PixelConstantBuffer<ConstantBuffer2>>(gfx, cb2));
 
-		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied =
+		//input layout desc for vertex1
+		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied1 =
 		{
 			{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{"COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
 		};
-		AddStaticBind(std::make_unique<InputLayout>(gfx, ied, pvsbc));
+
+		//vertex layout desc for vertex2
+		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied2 =
+		{
+			{"POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{"NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D11_INPUT_PER_VERTEX_DATA, 0},
+			{"TEXCOORD", 1, DXGI_FORMAT_R32G32_FLOAT, 0, 32, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		};
+
+		AddStaticBind(std::make_unique<InputLayout>(gfx, ied1, pvsbc));
 
 		AddStaticBind(std::make_unique<Topology>(gfx, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 	}
