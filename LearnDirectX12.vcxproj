@@ -143,6 +143,7 @@
     <ClInclude Include="Source\Public\Math.h" />
     <ClInclude Include="Source\Public\Mouse.h" />
     <ClInclude Include="Source\Public\Plane.h" />
+    <ClInclude Include="Source\Public\Prism.h" />
     <ClInclude Include="Source\Public\resource1.h" />
     <ClInclude Include="Source\Public\Timer.h" />
     <ClInclude Include="Source\Public\Util.h" />
