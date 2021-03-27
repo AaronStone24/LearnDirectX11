@@ -16,16 +16,17 @@ public:
 		constexpr float radius = 1.0f;
 		const auto base = DirectX::XMVectorSet(0.0f, 0.0f, radius, 0.0f);
 		const auto latitudeAngle = PI / latDiv;
-		const auto longitudeAngle = 2 * PI / longDiv;
+		const auto longitudeAngle = 2.0f * PI / longDiv;
 
 		std::vector<V> vertices;
-		for (int iLat = 0; iLat < latDiv; ++iLat)
+		for (int iLat = 1; iLat < latDiv; ++iLat)
 		{
 			const auto latBase = DirectX::XMVector3Transform(
 				base,
-				DirectX::XMMatrixRotationZ(iLat * latitudeAngle)
+				DirectX::XMMatrixRotationX(iLat * latitudeAngle)
 			);
-			for (int iLong = 0; iLong < longDiv; ++iLong) {
+			for (int iLong = 0; iLong < longDiv; ++iLong)
+			{
 				vertices.emplace_back();
 				auto v = DirectX::XMVector3Transform(
 					latBase,
@@ -37,23 +38,23 @@ public:
 		}
 
 		//add the cap vertices
-		const auto iNorthVertex = (unsigned short)vertices.size();
+		const auto iNorthPole = (unsigned short)vertices.size();
 		vertices.emplace_back();
 		DirectX::XMStoreFloat3(&vertices.back().pos, base);
-		vertices.back().color = Colors::color[latDiv & Colors::numColors];
-		const auto iSouthVertex = (unsigned short)vertices.size();
+		vertices.back().color = Colors::color[latDiv % Colors::numColors];
+		const auto iSouthPole = (unsigned short)vertices.size();
 		vertices.emplace_back();
-		DirectX::XMStoreFloat3(vertices.back().pos, DirectX::XMVectorNegate(base));
-		vertices.back().color = Colors::color[longDiv & Colors::numColors];
+		DirectX::XMStoreFloat3(&vertices.back().pos, DirectX::XMVectorNegate(base));
+		vertices.back().color = Colors::color[longDiv % Colors::numColors];
 
 		const auto calcIdx = [latDiv, longDiv](unsigned short iLat, unsigned short iLong)
 		{
 			return iLat * longDiv + iLong;
 		};
 		std::vector<unsigned short> indices;
-		for (unsigned short iLat = 0; iLat < latDiv; ++iLat)
+		for (unsigned short iLat = 0; iLat < latDiv - 2; ++iLat)
 		{
-			for (unsigned short iLong = 0; iLong < longDiv; ++iLong)
+			for (unsigned short iLong = 0; iLong < longDiv - 1; ++iLong)
 			{
 				indices.push_back(calcIdx(iLat, iLong));
 				indices.push_back(calcIdx(iLat + 1, iLong));
@@ -94,5 +95,11 @@ public:
 		indices.push_back(iSouthPole);
 
 		return { std::move(vertices),std::move(indices) };
+	}
+
+	template<class V>
+	static IndexedTraingleList<V> Make()
+	{
+		return MakeTesselated<V>(12, 24);
 	}
 };

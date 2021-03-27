@@ -1,6 +1,7 @@
 #include "../Public/Box.h"
 #include "../Public/Bindable/BindableBase.h"
 #include "../Public/Cube.h"
+#include "../Public/Sphere.h"
 
 Box::Box(Graphics& gfx,
 	std::mt19937& rng,
@@ -36,7 +37,7 @@ Box::Box(Graphics& gfx,
 			DirectX::XMFLOAT2 tex1;
 		};
 
-		auto model = Cube::Make<Vertex1>();
+		auto model = Sphere::Make<Vertex1>();
 		AddStaticBind(std::make_unique<VertexBuffer>(gfx, model.vertices));
 
 		auto pvs = std::make_unique<VertexShader>(gfx, L"VertexShader.cso");
