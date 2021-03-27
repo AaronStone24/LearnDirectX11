@@ -182,6 +182,9 @@
     <ClInclude Include="Source\Public\Prism.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Sphere.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LearnDirectX121.rc">
