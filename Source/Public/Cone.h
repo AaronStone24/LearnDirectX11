@@ -26,19 +26,19 @@ public:
 				DirectX::XMMatrixRotationZ(longitudeAngle * iLong)
 			);
 			DirectX::XMStoreFloat3(&vertices.back().pos, v);
-			vertices.back().color = Colors::color[iLong % Colors::color.size()];
+			vertices.back().color = Colors::color[iLong % Colors::numColors];
 		}
 
 		//the center
 		vertices.emplace_back();
 		vertices.back().pos = { 0.0f, 0.0f, -1.0f };
-		vertices.back().color = Colors::color[longDiv % Colors::color.size()];
+		vertices.back().color = Colors::color[longDiv % Colors::numColors];
 		const auto iCenter = (unsigned short)(vertices.size() - 1);
 
 		//the tip
 		vertices.emplace_back();
 		vertices.back().pos = { 0.0f, 0.0f, 1.0f };
-		vertices.back().color = Colors::color[(longDiv + 1) % Colors::color.size()];
+		vertices.back().color = Colors::color[(longDiv + 1) % Colors::numColors];
 		const auto iTip = (unsigned short)(vertices.size() - 1);
 		
 		//base indices

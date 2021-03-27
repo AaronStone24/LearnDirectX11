@@ -27,4 +27,6 @@ namespace Colors
 		XMFLOAT4((const float*)&Colors::Cyan),
 		XMFLOAT4((const float*)&Colors::Magenta)
 	};
+
+	XMGLOBALCONST int numColors = 8;
 }

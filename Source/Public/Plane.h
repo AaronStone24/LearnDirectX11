@@ -38,7 +38,7 @@ public:
 						DirectX::XMVectorSet(float(x) * dx, y_pos, 0.0f, 0.0f
 					);
 					DirectX::XMStoreFloat3(&vertices[i].pos, v);
-					vertices[i].color = Colors::color[i % Colors::color.size()];
+					vertices[i].color = Colors::color[i % Colors::numColors];
 				}
 			}
 		}
