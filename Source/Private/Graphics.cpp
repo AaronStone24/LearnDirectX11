@@ -121,6 +121,24 @@ Graphics::Graphics(HWND hWnd)
 	mScreenViewport.MinDepth = 0.0f;
 	mScreenViewport.MaxDepth = 1.0f;
 	pContext->RSSetViewports(1, &mScreenViewport);
+
+	//Creating render state objects at initialization time
+	//Wireframe descriptor
+	D3D11_RASTERIZER_DESC rsDescWF = {};
+	ZeroMemory(&rsDescWF, sizeof(D3D11_RASTERIZER_DESC));
+	rsDescWF.FillMode = D3D11_FILL_WIREFRAME;
+	rsDescWF.FrontCounterClockwise = false;
+
+	//Solid descriptor
+	D3D11_RASTERIZER_DESC rsDescS = {};
+	ZeroMemory(&rsDescS, sizeof(D3D11_RASTERIZER_DESC));
+	rsDescS.FillMode = D3D11_FILL_SOLID;
+	rsDescS.FrontCounterClockwise = false;
+
+	//Creating wireframe rasterizer
+	pDevice->CreateRasterizerState(&rsDescWF, &mWireframeRS);
+	//creating solid rasterizer
+	pDevice->CreateRasterizerState(&rsDescS, &mSolidRS);
 }
 
 void Graphics::EndFrame()
@@ -148,6 +166,22 @@ void Graphics::SetProjection(DirectX::FXMMATRIX proj) noexcept
 DirectX::XMMATRIX Graphics::GetProjection() const noexcept
 {
 	return projection;
+}
+
+void Graphics::SetRasterizerState(int choice) noexcept
+{
+	switch (choice)
+	{
+	case 0:
+		pContext->RSSetState(mSolidRS.Get());
+		break;
+	case 1:
+		pContext->RSSetState(mWireframeRS.Get());
+		break;
+	default:
+		pContext->RSSetState(0);	//the default state
+		break;
+	}
 }
 
 //Exception part down from here

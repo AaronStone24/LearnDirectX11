@@ -8,6 +8,7 @@
 #include <random>
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
+#include <Windows.h>
 
 class Graphics
 {
@@ -37,6 +38,7 @@ public:
 	void DrawIndexed(UINT count) noexcept;
 	void SetProjection(DirectX::FXMMATRIX proj) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
+	void SetRasterizerState(int choice) noexcept;
 private:
 	DirectX::XMMATRIX projection;
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice = nullptr;
@@ -44,4 +46,6 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> mRenderTargetView = nullptr;
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> mDepthStencilView = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> mWireframeRS = nullptr;
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> mSolidRS = nullptr;
 };

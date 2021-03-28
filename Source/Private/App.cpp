@@ -59,6 +59,7 @@ App::App()
 
 	Factory f(wnd.Gfx());
 	drawables.reserve(nDrawables);
+	wnd.Gfx().SetRasterizerState(1);
 	std::generate_n(std::back_inserter(drawables), nDrawables, f);
 
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 5.0f / 7.0f, 0.5f, 40.0f));
