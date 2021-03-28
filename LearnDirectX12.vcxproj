@@ -112,6 +112,7 @@
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
     <ClCompile Include="Source\Private\Keyboard.cpp" />
+    <ClCompile Include="Source\Private\Melon.cpp" />
     <ClCompile Include="Source\Private\Mouse.cpp" />
     <ClCompile Include="Source\Private\Timer.cpp" />
     <ClCompile Include="Source\Private\Window.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Source\Public\IndexedTriangleList.h" />
     <ClInclude Include="Source\Public\Keyboard.h" />
     <ClInclude Include="Source\Public\Math.h" />
+    <ClInclude Include="Source\Public\Melon.h" />
     <ClInclude Include="Source\Public\Mouse.h" />
     <ClInclude Include="Source\Public\Plane.h" />
     <ClInclude Include="Source\Public\Prism.h" />
@@ -158,14 +160,14 @@
     <Image Include="phoenix_icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="ColorBlendPS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
     </FxCompile>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="ColorBlendVS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)%(Filename).cso</ObjectFileOutput>

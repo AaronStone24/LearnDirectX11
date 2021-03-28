@@ -90,6 +90,9 @@
     <ClCompile Include="Source\Private\Box.cpp">
       <Filter>Source\Private</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Private\Melon.cpp">
+      <Filter>Source\Private</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Public\WindowsMessageMap.h">
@@ -185,6 +188,9 @@
     <ClInclude Include="Source\Public\Sphere.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Public\Melon.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="LearnDirectX121.rc">
@@ -197,10 +203,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="VertexShader.hlsl">
+    <FxCompile Include="ColorBlendVS.hlsl">
       <Filter>Source\Shader</Filter>
     </FxCompile>
-    <FxCompile Include="PixelShader.hlsl">
+    <FxCompile Include="ColorBlendPS.hlsl">
       <Filter>Source\Shader</Filter>
     </FxCompile>
   </ItemGroup>
