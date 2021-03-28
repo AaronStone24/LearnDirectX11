@@ -39,7 +39,7 @@ Pyramid::Pyramid(Graphics& gfx,
 
 		AddStaticBind(std::make_unique<PixelShader>(gfx, L"ColorBlendPS.cso"));
 
-		AddStaticBind(std::make_unique<IndexBuffer>(gfx, model.indices));
+		AddStaticIndexBuffer(std::make_unique<IndexBuffer>(gfx, model.indices));
 
 		const std::vector<D3D11_INPUT_ELEMENT_DESC> ied1 =
 		{
@@ -56,7 +56,7 @@ Pyramid::Pyramid(Graphics& gfx,
 		SetIndexFromStatic();
 	}
 
-	AddBind(std::make_unique<TransformCBuf>(gfx, *this);
+	AddBind(std::make_unique<TransformCBuf>(gfx, *this));
 }
 
 void Pyramid::Update(float dt) noexcept
