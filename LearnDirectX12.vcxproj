@@ -123,6 +123,7 @@
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
+    <ClCompile Include="Source\Private\Hill.cpp" />
     <ClCompile Include="Source\Private\Keyboard.cpp" />
     <ClCompile Include="Source\Private\Melon.cpp" />
     <ClCompile Include="Source\Private\Mouse.cpp" />
@@ -153,6 +154,7 @@
     <ClInclude Include="Source\Public\Drawable\DrawableBase.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
+    <ClInclude Include="Source\Public\Hill.h" />
     <ClInclude Include="Source\Public\IndexedTriangleList.h" />
     <ClInclude Include="Source\Public\Keyboard.h" />
     <ClInclude Include="Source\Public\Math.h" />
