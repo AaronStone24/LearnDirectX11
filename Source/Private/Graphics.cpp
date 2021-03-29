@@ -128,12 +128,14 @@ Graphics::Graphics(HWND hWnd)
 	ZeroMemory(&rsDescWF, sizeof(D3D11_RASTERIZER_DESC));
 	rsDescWF.FillMode = D3D11_FILL_WIREFRAME;
 	rsDescWF.FrontCounterClockwise = false;
+	rsDescWF.CullMode = D3D11_CULL_BACK;
 
 	//Solid descriptor
 	D3D11_RASTERIZER_DESC rsDescS = {};
 	ZeroMemory(&rsDescS, sizeof(D3D11_RASTERIZER_DESC));
 	rsDescS.FillMode = D3D11_FILL_SOLID;
 	rsDescS.FrontCounterClockwise = false;
+	rsDescS.CullMode = D3D11_CULL_BACK;
 
 	//Creating wireframe rasterizer
 	pDevice->CreateRasterizerState(&rsDescWF, &mWireframeRS);

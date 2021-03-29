@@ -31,6 +31,9 @@
     <Filter Include="Source\Private\Drawable">
       <UniqueIdentifier>{58266e8e-4910-4628-aeef-b078260169b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Effects">
+      <UniqueIdentifier>{a9bd2cad-6ac2-4195-8454-9f34b1d99bdc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp">
@@ -195,6 +198,9 @@
       <Filter>Source\Public</Filter>
     </ClInclude>
     <ClInclude Include="Source\Public\Pyramid.h">
+      <Filter>Source\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Public\d3dx11effect.h">
       <Filter>Source\Public</Filter>
     </ClInclude>
   </ItemGroup>

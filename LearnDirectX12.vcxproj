@@ -72,6 +72,12 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Source\Public\</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -96,6 +102,12 @@
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(SolutionDir)\Source\Public\</AdditionalIncludeDirectories>
     </ResourceCompile>
+    <FxCompile>
+      <ShaderType>Effect</ShaderType>
+    </FxCompile>
+    <FxCompile>
+      <ShaderModel>5.0</ShaderModel>
+    </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\App.cpp" />
@@ -136,6 +148,7 @@
     <ClInclude Include="Source\Public\Cone.h" />
     <ClInclude Include="Source\Public\Cube.h" />
     <ClInclude Include="Source\Public\CustomHeaders.h" />
+    <ClInclude Include="Source\Public\d3dx11effect.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Drawable\DrawableBase.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
