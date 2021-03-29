@@ -10,13 +10,13 @@ class Plane
 {
 public:
 	template<class V>
-	static IndexedTraingleList<V> MakeTesselated(int div_x, int div_y)
+	static IndexedTraingleList<V> MakeTesselated(int width, int height, int div_x, int div_y)
 	{
 		assert(div_x >= 1);
 		assert(div_y >= 1);
 
-		constexpr float width = 2.0f;
-		constexpr float height = 2.0f;
+		//constexpr float width = 2.0f;
+		//constexpr float height = 2.0f;
 		const int nVertices_x = div_x + 1;
 		const int nVertices_y = div_y + 1;
 		std::vector<V> vertices(nVertices_x * nVertices_y);
@@ -35,7 +35,7 @@ public:
 				{
 					const auto v = DirectX::XMVectorAdd(
 						bottomLeft,
-						DirectX::XMVectorSet(float(x) * dx, y_pos, 0.0f, 0.0f
+						DirectX::XMVectorSet(float(x) * dx, 0.0f, y_pos, 0.0f)
 					);
 					DirectX::XMStoreFloat3(&vertices[i].pos, v);
 					vertices[i].color = Colors::color[i % Colors::numColors];
@@ -50,9 +50,9 @@ public:
 			{
 				return (unsigned short)(y * nVertices_x + x);
 			};
-			for (size_t y = 0; y < dy; y++)
+			for (size_t y = 0; y < div_y; y++)
 			{
-				for (size_t x = 0; x < dx; x++)
+				for (size_t x = 0; x < div_x; x++)
 				{
 					const std::array<unsigned short, 4> indexArray =
 						{ vxy2i(x, y), vxy2i(x + 1, y), vxy2i(x, y + 1), vxy2i(x + 1, y + 1) };
@@ -72,6 +72,6 @@ public:
 	template<class V>
 	static IndexedTraingleList<V> Make()
 	{
-		return MakeTesselated<V>(1, 1);
+		return MakeTesselated<V>(1, 1, 1, 1);
 	}
 };

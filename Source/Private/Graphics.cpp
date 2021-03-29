@@ -31,10 +31,10 @@ Graphics::Graphics(HWND hWnd)
 	sd.Flags = 0;
 
 	UINT creationFlags = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
-#if defined(_DEBUG)
+	#if defined(_DEBUG)
 	// If the project is in a debug build, enable the debug layer.
 	creationFlags |= D3D11_CREATE_DEVICE_DEBUG;
-#endif
+	#endif
 
 	// create device, front/back buffers, and swap chain and rendering context
 	D3D11CreateDeviceAndSwapChain(
@@ -116,8 +116,8 @@ Graphics::Graphics(HWND hWnd)
 	D3D11_VIEWPORT mScreenViewport = {};
 	mScreenViewport.TopLeftX = 0;
 	mScreenViewport.TopLeftY = 0;
-	mScreenViewport.Width = 700.0f;
-	mScreenViewport.Height = 500.0f;
+	mScreenViewport.Width = 1080.0f;
+	mScreenViewport.Height = 720.0f;
 	mScreenViewport.MinDepth = 0.0f;
 	mScreenViewport.MaxDepth = 1.0f;
 	pContext->RSSetViewports(1, &mScreenViewport);
@@ -128,14 +128,14 @@ Graphics::Graphics(HWND hWnd)
 	ZeroMemory(&rsDescWF, sizeof(D3D11_RASTERIZER_DESC));
 	rsDescWF.FillMode = D3D11_FILL_WIREFRAME;
 	rsDescWF.FrontCounterClockwise = false;
-	rsDescWF.CullMode = D3D11_CULL_BACK;
+	rsDescWF.CullMode = D3D11_CULL_NONE;
 
 	//Solid descriptor
 	D3D11_RASTERIZER_DESC rsDescS = {};
 	ZeroMemory(&rsDescS, sizeof(D3D11_RASTERIZER_DESC));
 	rsDescS.FillMode = D3D11_FILL_SOLID;
 	rsDescS.FrontCounterClockwise = false;
-	rsDescS.CullMode = D3D11_CULL_BACK;
+	rsDescS.CullMode = D3D11_CULL_NONE;
 
 	//Creating wireframe rasterizer
 	pDevice->CreateRasterizerState(&rsDescWF, &mWireframeRS);

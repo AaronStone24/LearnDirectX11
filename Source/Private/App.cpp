@@ -3,6 +3,7 @@
 #include "../Public/Melon.h"
 #include "../Public/Pyramid.h"
 #include "../Public/Math.h"
+#include "../Public/Hill.h"
 #include <sstream>
 #include <iomanip>
 #include <memory>
@@ -21,7 +22,7 @@ App::App()
 			gfx(gfx)
 		{}
 		std::unique_ptr<Drawable> operator()()
-		{
+		{	/*
 			switch (typedist(rng))
 			{
 			case 0:
@@ -35,14 +36,15 @@ App::App()
 					odist, rdist, bdist
 					);
 			case 2:
-				return std::make_unique<Melon>(
-					gfx, rng, adist, ddist,
-					odist, rdist, longdist, latdist
+				return std::make_unique<Hill>(
+					gfx
 					);
 			default:
 				assert(false && "bad drawable type in factory");
 				return {};
 			}
+			*/
+			return std::make_unique<Hill>(gfx);
 		}
 	private:
 		Graphics& gfx;
@@ -58,11 +60,11 @@ App::App()
 	};
 
 	Factory f(wnd.Gfx());
-	drawables.reserve(nDrawables);
-	wnd.Gfx().SetRasterizerState(1);
-	std::generate_n(std::back_inserter(drawables), nDrawables, f);
-
-	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 5.0f / 7.0f, 0.5f, 40.0f));
+	//drawables.reserve(nDrawables);
+	wnd.Gfx().SetRasterizerState(0);
+	//std::generate_n(std::back_inserter(drawables), nDrawables, f);
+	drawables.push_back(std::make_unique<Hill>(wnd.Gfx()));
+	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 72.0f / 108.0f, 0.5f, 500.0f));
 }
 
 void App::DoFrame()
