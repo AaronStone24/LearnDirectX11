@@ -121,6 +121,7 @@
     <ClCompile Include="Source\Private\Bindable\VertexShader.cpp" />
     <ClCompile Include="Source\Private\Box.cpp" />
     <ClCompile Include="Source\Private\Drawable\Drawable.cpp" />
+    <ClCompile Include="Source\Private\GDIPlusManager.cpp" />
     <ClCompile Include="Source\Private\Graphics.cpp" />
     <ClCompile Include="Source\Private\HandleException.cpp" />
     <ClCompile Include="Source\Private\Hill.cpp" />
@@ -152,6 +153,7 @@
     <ClInclude Include="Source\Public\d3dx11effect.h" />
     <ClInclude Include="Source\Public\Drawable\Drawable.h" />
     <ClInclude Include="Source\Public\Drawable\DrawableBase.h" />
+    <ClInclude Include="Source\Public\GDIPlusManager.h" />
     <ClInclude Include="Source\Public\Graphics.h" />
     <ClInclude Include="Source\Public\HandleException.h" />
     <ClInclude Include="Source\Public\Hill.h" />

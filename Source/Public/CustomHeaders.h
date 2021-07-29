@@ -48,6 +48,9 @@
  *  NOMCX             - Modem Configuration Extensions
  */
 
+//In files where #define USEALL_DEFINES will be used, that file will use these defines.
+#ifndef USEALL_DEFINES
+
 #define WIN32_LEAN_AND_MEAN
 #define NOGDICAPMASKS
 #define NOSYSMETRICS
@@ -65,7 +68,6 @@
 #define NONLS
 #define NOMEMMGR
 #define NOMETAFILE
-#define NOMINMAX
 #define NOOPENFILE
 #define NOSCROLL
 #define NOSERVICE
@@ -82,6 +84,10 @@
 #define NOPROXYSTUB
 #define NOIMAGE
 #define NOTAPE
+
+#endif // !USEALL_DEFINES
+
+#define NOMINMAX
 
 #define STRICT
 
