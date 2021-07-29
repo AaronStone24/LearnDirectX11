@@ -179,6 +179,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="phoenix_icon.ico" />
+    <Image Include="Source\Private\Images\hummingbird.png" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="ColorBlendPS.hlsl">

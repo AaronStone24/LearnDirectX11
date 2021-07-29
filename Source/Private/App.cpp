@@ -4,10 +4,14 @@
 #include "../Public/Pyramid.h"
 #include "../Public/Math.h"
 #include "../Public/Hill.h"
+#include "../Public/Surface.h"
+#include "../Public/GDIPlusManager.h"
 #include <sstream>
 #include <iomanip>
 #include <memory>
 #include <algorithm>
+
+GDIPlusManager gdipm;
 
 
 App::App()
@@ -64,6 +68,7 @@ App::App()
 	wnd.Gfx().SetRasterizerState(0);
 	//std::generate_n(std::back_inserter(drawables), nDrawables, f);
 	drawables.push_back(std::make_unique<Hill>(wnd.Gfx()));
+	const auto s = Surface::FromFile("Source\\Private\\Images\\hummingbird.png");
 	wnd.Gfx().SetProjection(DirectX::XMMatrixPerspectiveLH(1.0f, 72.0f / 108.0f, 0.5f, 500.0f));
 }
 

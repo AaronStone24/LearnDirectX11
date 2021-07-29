@@ -34,6 +34,9 @@
     <Filter Include="Source\Effects">
       <UniqueIdentifier>{a9bd2cad-6ac2-4195-8454-9f34b1d99bdc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Images">
+      <UniqueIdentifier>{e3f948a3-b4e3-4446-af9c-d5b49e799ba9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp">
@@ -230,6 +233,9 @@
   <ItemGroup>
     <Image Include="phoenix_icon.ico">
       <Filter>Resources</Filter>
+    </Image>
+    <Image Include="Source\Private\Images\hummingbird.png">
+      <Filter>Source\Images</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
