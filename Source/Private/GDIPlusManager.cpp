@@ -1,9 +1,9 @@
-#define USEALL_DEFINES
+#define SKIP_DEFINES
 #include "../Public/CustomHeaders.h"
 #include "../Public/GDIPlusManager.h"
 #include <algorithm>
 
-namespace GdiPlus
+namespace Gdiplus
 {
 	using std::min;
 	using std::max;

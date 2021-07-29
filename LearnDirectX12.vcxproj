@@ -129,6 +129,7 @@
     <ClCompile Include="Source\Private\Melon.cpp" />
     <ClCompile Include="Source\Private\Mouse.cpp" />
     <ClCompile Include="Source\Private\Pyramid.cpp" />
+    <ClCompile Include="Source\Private\Surface.cpp" />
     <ClCompile Include="Source\Private\Timer.cpp" />
     <ClCompile Include="Source\Private\Window.cpp" />
     <ClCompile Include="Source\Private\WindowsMessageMap.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Source\Public\Pyramid.h" />
     <ClInclude Include="Source\Public\resource1.h" />
     <ClInclude Include="Source\Public\Sphere.h" />
+    <ClInclude Include="Source\Public\Surface.h" />
     <ClInclude Include="Source\Public\Timer.h" />
     <ClInclude Include="Source\Public\Util.h" />
     <ClInclude Include="Source\Public\Window.h" />
